@@ -1,23 +1,27 @@
-function createCoffee() {
-    const coffee = document.createElement("div");
-    coffee.innerHTML = "☕";
-    coffee.classList.add("coffee");
+const icons = ["☕","🫘"];
 
-    coffee.style.left = Math.random() * window.innerWidth + "px";
-    coffee.style.fontSize = (20 + Math.random() * 30) + "px";
-    coffee.style.animationDuration = (6 + Math.random() * 6) + "s";
+function createParticle() {
+    const p = document.createElement("div");
+    p.className = "particle";
 
-    document.body.appendChild(coffee);
+    p.innerHTML = icons[Math.floor(Math.random()*icons.length)];
 
-    coffee.addEventListener("click", () => {
-        coffee.style.transform = "scale(2)";
-        coffee.style.opacity = "0";
-        setTimeout(() => coffee.remove(), 300);
-    });
+    p.style.left = Math.random() * window.innerWidth + "px";
+    p.style.top = "-50px";
+    p.style.fontSize = (18 + Math.random()*25) + "px";
+    p.style.animationDuration = (8 + Math.random()*5) + "s";
+
+    p.onclick = function () {
+        p.style.transform = "scale(2)";
+        p.style.opacity = "0";
+        setTimeout(() => p.remove(), 300);
+    };
+
+    document.body.appendChild(p);
 
     setTimeout(() => {
-        coffee.remove();
-    }, 12000);
+        if (p.parentNode) p.remove();
+    }, 13000);
 }
 
-setInterval(createCoffee, 500);
+setInterval(createParticle, 350);
